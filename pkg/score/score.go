@@ -46,7 +46,7 @@ func (c *client) GetHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 type requestFormat struct {
-	value int
+	Value int `json:"value"`
 }
 
 func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +64,7 @@ func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	val := rf.value
+	val := rf.Value
 	s := c.Set(val)
 
 	WriteJSONResponse(w, map[string]int{
@@ -83,7 +83,7 @@ func (c *client) AddHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	val := rf.value
+	val := rf.Value
 	s := c.Add(val)
 
 	WriteJSONResponse(w, map[string]int{
