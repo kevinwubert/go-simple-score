@@ -29,13 +29,11 @@ func (c *client) Get() int {
 
 func (c *client) Set(val int) int {
 	c.scoreValue = val
-	log.Infof("score changed to %v", c.scoreValue)
 	return c.scoreValue
 }
 
 func (c *client) Add(val int) int {
 	c.scoreValue += val
-	log.Infof("score changed to %v", c.scoreValue)
 	return c.scoreValue
 }
 
@@ -43,7 +41,7 @@ func (c *client) GetHandler(w http.ResponseWriter, r *http.Request) {
 	s := c.Get()
 
 	WriteJSONResponse(w, map[string]int{
-		"score": s,
+		"value": s,
 	})
 }
 
@@ -66,7 +64,7 @@ func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
 	s := c.Set(val)
 
 	WriteJSONResponse(w, map[string]int{
-		"score": s,
+		"value": s,
 	})
 }
 
@@ -85,7 +83,7 @@ func (c *client) AddHandler(w http.ResponseWriter, r *http.Request) {
 	s := c.Add(val)
 
 	WriteJSONResponse(w, map[string]int{
-		"score": s,
+		"value": s,
 	})
 }
 
