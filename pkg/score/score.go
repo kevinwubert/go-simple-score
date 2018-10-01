@@ -53,10 +53,18 @@ func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("r.Body is %v", r.Body)
 	r.ParseForm()
 	log.Infof("val: %v", r.PostFormValue("value"))
+	bs := []byte{}
+	_, err := r.Body.Read(bs)
+	if err != nil {
+		log.Errorf("body failed to read: %v", err)
+		WriteErrorResponse(w, err)
+		return
+	}
 
+	log.Infof("bs: , %v", string(bs))
 	decoder := json.NewDecoder(r.Body)
 	var rf requestFormat
-	err := decoder.Decode(&rf)
+	err = decoder.Decode(&rf)
 
 	if err != nil {
 		log.Errorf("decoder failed to decode: %v", err)
