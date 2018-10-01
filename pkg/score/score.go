@@ -29,12 +29,13 @@ func (c *client) Get() int {
 
 func (c *client) Set(val int) int {
 	c.scoreValue = val
-	log.Infof("score changed to %v", val)
+	log.Infof("score changed to %v", c.scoreValue)
 	return c.scoreValue
 }
 
 func (c *client) Add(val int) int {
 	c.scoreValue += val
+	log.Infof("score changed to %v", c.scoreValue)
 	return c.scoreValue
 }
 
