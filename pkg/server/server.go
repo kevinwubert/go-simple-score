@@ -17,6 +17,6 @@ func Main() error {
 	http.HandleFunc("/setScore", scoreClient.SetHandler)
 	http.HandleFunc("/addScore", scoreClient.AddHandler)
 
-	err := http.ListenAndServe(":930", nil)
+	err := http.ListenAndServe(":62802", nil)
 	return err
 }
