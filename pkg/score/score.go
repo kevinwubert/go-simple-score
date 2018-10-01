@@ -43,7 +43,21 @@ func (c *client) GetHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+type requestFormat struct {
+	value int
+}
+
 func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var rf requestFormat
+	err := decoder.Decode(&rf)
+
+	if err != nil {
+		WriteErrorResponse(w, err)
+		return
+	}
+
+	val := rf.value
 	s := c.Set(val)
 
 	WriteJSONResponse(w, map[string]int{
@@ -52,11 +66,26 @@ func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *client) AddHandler(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var rf requestFormat
+	err := decoder.Decode(&rf)
+
+	if err != nil {
+		WriteErrorResponse(w, err)
+		return
+	}
+
+	val := rf.value
 	s := c.Add(val)
 
 	WriteJSONResponse(w, map[string]int{
 		"score": s,
 	})
+}
+
+// WriteErrorResponse writes an error back from an invalid request
+func WriteErrorResponse(w http.ResponseWriter, err error) {
+	http.Error(w, err.Error(), http.StatusBadRequest)
 }
 
 // WriteJSONResponse writes some value and encodes into the response
