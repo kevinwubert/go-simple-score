@@ -3,6 +3,8 @@ package score
 import (
 	"encoding/json"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type client struct {
@@ -48,11 +50,16 @@ type requestFormat struct {
 }
 
 func (c *client) SetHandler(w http.ResponseWriter, r *http.Request) {
+	log.Infof("r.Body is %v", r.Body)
+	r.ParseForm()
+	log.Infof("val: %v", r.PostFormValue("value"))
+
 	decoder := json.NewDecoder(r.Body)
 	var rf requestFormat
 	err := decoder.Decode(&rf)
 
 	if err != nil {
+		log.Errorf("decoder failed to decode: %v", err)
 		WriteErrorResponse(w, err)
 		return
 	}
@@ -71,6 +78,7 @@ func (c *client) AddHandler(w http.ResponseWriter, r *http.Request) {
 	err := decoder.Decode(&rf)
 
 	if err != nil {
+		log.Errorf("decoder failed to decode: %v", err)
 		WriteErrorResponse(w, err)
 		return
 	}
