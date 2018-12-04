@@ -8,13 +8,13 @@ import (
 )
 
 type Vector struct {
-	x float32
-	y float32
-	z float32
+	X float32 `json:"x"`
+	Y float32 `json:"y"`
+	Z float32 `json:"z"`
 }
 
-func NewVector(x float32, y float32, z float32) Vector {
-	return Vector{x: 0, y: 0, z: 0}
+func NewVector(X float32, Y float32, Z float32) Vector {
+	return Vector{X: X, Y: Y, Z: Z}
 }
 
 type client struct {
