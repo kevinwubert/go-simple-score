@@ -10,6 +10,14 @@
   revision = "b729f2633dfe35f4d1d8a32385f6685610ce1cb5"
 
 [[projects]]
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
+
+[[projects]]
   digest = "1:dc2d85c13ac22c22a1f3170a41a8e1b897fa05134aaf533f16df44f66a25b4a1"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
@@ -19,9 +27,13 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3f3a05ae0b95893d90b9b3b5afdb79a9b3d96e4e36e099d841ae602e4aca0da8"
+  digest = "1:42c7e30272119bd61cee83d6448f31bcb408799a5e1802edc53cec1378e19941"
   name = "golang.org/x/crypto"
-  packages = ["ssh/terminal"]
+  packages = [
+    "acme",
+    "acme/autocert",
+    "ssh/terminal",
+  ]
   pruneopts = "UT"
   revision = "5295e8364332db77d75fce11f1d19c053919a9c9"
 
@@ -39,6 +51,10 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/sirupsen/logrus"]
+  input-imports = [
+    "github.com/pkg/errors",
+    "github.com/sirupsen/logrus",
+    "golang.org/x/crypto/acme/autocert",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -13,8 +13,8 @@ type Vector struct {
 	Z float32 `json:"z"`
 }
 
-func NewVector(X float32, Y float32, Z float32) Vector {
-	return Vector{X: X, Y: Y, Z: Z}
+func NewVector(x float32, y float32, z float32) Vector {
+	return Vector{X: x, Y: y, Z: z}
 }
 
 type client struct {

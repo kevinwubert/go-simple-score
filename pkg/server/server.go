@@ -27,6 +27,6 @@ func Main() error {
 	http.HandleFunc("/getTransform", transformClient.GetHandler)
 	http.HandleFunc("/setTransform", transformClient.SetHandler)
 
-	err := http.ListenAndServe(":62802", nil)
+	err := http.ListenAndServe(":80", nil)
 	return err
 }
