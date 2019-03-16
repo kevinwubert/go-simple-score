@@ -5,6 +5,7 @@ import (
 
 	"github.com/kevinwubert/go-simple-score/pkg/score"
 	"github.com/kevinwubert/go-simple-score/pkg/transform"
+	"github.com/kevinwubert/go-simple-score/pkg/values"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -25,6 +26,8 @@ func Main() error {
 
 	transformClient2 := transform.New(initPos2, initRot2)
 
+	valuesClient := values.New()
+
 	http.HandleFunc("/getScore", scoreClient.GetHandler)
 	http.HandleFunc("/setScore", scoreClient.SetHandler)
 	http.HandleFunc("/addScore", scoreClient.AddHandler)
@@ -33,6 +36,9 @@ func Main() error {
 	http.HandleFunc("/setTransform", transformClient.SetHandler)
 	http.HandleFunc("/getTransform2", transformClient2.GetHandler)
 	http.HandleFunc("/setTransform2", transformClient2.SetHandler)
+
+	http.HandleFunc("/getValue", valuesClient.GetHandler)
+	http.HandleFunc("/setValue", valuesClient.SetHandler)
 
 	err := http.ListenAndServe(":80", nil)
 	return err
